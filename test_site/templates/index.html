@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Olmest.com Home</h1>
+  <p>Welcome to Olmest.com, a website developed by <em>Mozilla Developer Network</em>!</p>
+  <h2>Dynamic content</h2>
+  <p>The website has the following record counts:</p>
+  <ul>
+    <li><strong>Medical Equipment:</strong> {{ num_devices }}</li>
+    <li><strong>Products available:</strong> {{ num_instances_available }}</li>
+  </ul>
+{% endblock %}
