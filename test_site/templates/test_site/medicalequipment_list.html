@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+<h1>MedicalEquipment List</h1>
+
+{% block content %}
+  <h1>MedicalEquipment List</h1>
+  
+    {% for x in medicalequipment_list %}
+    <li>
+      <a href="{{ x.get_absolute_url }}">{{ x.name }}</a> ({{ x.brand }})
+    </li>
+    {% endfor %}
+  
+{% endblock %}

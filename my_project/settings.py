@@ -31,15 +31,14 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = [ 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #"test_site"
-    "test_site.apps.TestSiteConfig"
+    "test_site" #Adding application test_site
 ]
 
 MIDDLEWARE = [
@@ -57,7 +56,7 @@ ROOT_URLCONF = 'my_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,"template")],
+        'DIRS': [ os.path.join(BASE_DIR,"templates")], # configuring the template
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

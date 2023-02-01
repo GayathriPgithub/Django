@@ -14,23 +14,29 @@ class MedicalEquipment(models.Model):
     brand = models.ForeignKey("Brand",on_delete=models.SET_NULL, null=True)
     model = models.CharField(max_length=200)
     description = models.TextField(max_length=1500)
-    price = models.IntegerField()
+    price_in_euros = models.IntegerField()
     category = models.ManyToManyField(Category,help_text='Select category for this device')
 
-    def display_category(self):
-        return ', '.join(category.name for category in self.category.all()[:3])
-    display_category.short_description = 'Category'
+    class Meta:
+        ordering = ['name','brand']
 
+    def display_category(self):
+        return ', '.join([category.name for category in self.category.all()[:3]])
+    
+    display_category.short_description = 'Category'
+    
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse ('Product-details',args=[str(self.id)])    
+        return reverse ('medicalequipment_detail',args=[str(self.id)])     
+   
 
 class ProductInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular Device')
-    device = models.ForeignKey('MedicalEquipment', on_delete=models.RESTRICT, null=True)
+    medicalequipment = models.ForeignKey('MedicalEquipment', on_delete=models.RESTRICT, null=True)
     date_of_upload = models.DateField()
+    #created_at = models.DateTimeField(auto_now_add=True)
     status_type = (
         ('i', 'In stock'),
         ('o', 'Out of stock')
@@ -47,7 +53,8 @@ class ProductInstance(models.Model):
         ordering = ['status']
 
     def __str__(self):
-        return f'{self.id} ({self.device.name})'
+        return f'{self.id} ({self.medicalequipment.name})'
+        #return '{0} ({1})'.format(self.id, self.book.title)
 
 
 class Brand(models.Model):
